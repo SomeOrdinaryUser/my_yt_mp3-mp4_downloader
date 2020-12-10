@@ -1,6 +1,6 @@
 # my_yt_mp3/mp4_downloader
 
-How to make work: 
+How to use: 
 
 * install python3 or above
 
