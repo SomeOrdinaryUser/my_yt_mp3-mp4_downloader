@@ -3,12 +3,12 @@ from pytube import YouTube
 from pytube import Playlist
 import youtube_dl
 import ffmpeg
-import random, string
+import random
 
 # generate unique name so if you want to download both mp3 and mp4 you can
 def generate_name():
-    password_length = 4
-    possible_characters = "!@#$%^&*()"
+    password_length = 3
+    possible_characters = "🎅❄️🎁🦌⛄👪🎄"  # + !@#$%^&*()123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ if you want
 
     random_character_list = [
         random.choice(possible_characters) for i in range(password_length)
@@ -46,10 +46,17 @@ def downloader():
                     downloader()
             downloader()
         elif audio_or_video == "v":
-            single_url = str(input("Enter single url: "))
-            YouTube(single_url).streams.first().download()
-            print("Done!")
-            downloader()
+            single = str(input("Enter a url: "))
+            ydl_opts = {"outtmpl": generate_name()}
+            with youtube_dl.YoutubeDL(ydl_opts, "-k") as ydl:
+                try:
+                    ydl.download([single])
+                except:
+                    print(
+                        "oof! URL doesn't exist. Please remove the broken link in your playlist :)"
+                    )
+                print("Done!")
+                downloader()
     elif p_or_s == "p":
         # ask user for their playlist url
         enter_playlist_url = str(input("Enter playlist url: "))
