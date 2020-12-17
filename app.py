@@ -8,7 +8,7 @@ import random
 # generate unique name so if you want to download both mp3 and mp4 you can
 def generate_name():
     password_length = 3
-    possible_characters = "🎅❄️🎁🦌⛄👪🎄"  # + !@#$%^&*()123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ if you want
+    possible_characters = "🎅❄️🎁🦌⛄👪🎄"  # or !@#$%^&*()123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ if you want
 
     random_character_list = [
         random.choice(possible_characters) for i in range(password_length)
@@ -69,7 +69,6 @@ def downloader():
                     "preferredquality": "192",
                 }
             ],
-            "outtmpl": generate_name(),
         }
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             try:
