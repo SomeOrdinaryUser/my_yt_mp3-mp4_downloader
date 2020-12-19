@@ -1,6 +1,5 @@
 from __future__ import unicode_literals
-from pytube import YouTube
-from pytube import Playlist
+
 import youtube_dl
 import ffmpeg
 import random
@@ -8,13 +7,28 @@ import random
 # generate unique name so if you want to download both mp3 and mp4 you can
 def generate_name():
     password_length = 3
-    possible_characters = "🎅❄️🎁🦌⛄👪🎄"  # or !@#$%^&*()123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ if you want
+    possible_characters = (
+        "!@#$%^&*()123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    )
 
     random_character_list = [
         random.choice(possible_characters) for i in range(password_length)
     ]
     kek = ".mp3"
     random_password = "%(title)s" + " - " + "".join(random_character_list) + str(kek)
+    return random_password
+
+
+def generate_name_wo_mp3():
+    password_length = 3
+    possible_characters = (
+        "!@#$%^&*()123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    )
+
+    random_character_list = [
+        random.choice(possible_characters) for i in range(password_length)
+    ]
+    random_password = "%(title)s" + " - " + "".join(random_character_list)
     return random_password
 
 
@@ -43,19 +57,16 @@ def downloader():
                     print(
                         "oof! URL doesn't exist. Please remove the broken link in your playlist :)"
                     )
+                    print("Done!\n")
                     downloader()
             downloader()
         elif audio_or_video == "v":
             single = str(input("Enter a url: "))
-            ydl_opts = {"outtmpl": generate_name()}
-            with youtube_dl.YoutubeDL(ydl_opts, "-k") as ydl:
-                try:
-                    ydl.download([single])
-                except:
-                    print(
-                        "oof! URL doesn't exist. Please remove the broken link in your playlist :)"
-                    )
-                print("Done!")
+            ydl_opts = {
+                "outtmpl": generate_name_wo_mp3(),
+            }
+            with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+                ydl.download([single])
                 downloader()
     elif p_or_s == "p":
         # ask user for their playlist url
@@ -69,6 +80,7 @@ def downloader():
                     "preferredquality": "192",
                 }
             ],
+            "outtmpl": generate_name(),
         }
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             try:
