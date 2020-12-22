@@ -1,8 +1,6 @@
 How to use: 
 
-* install python3 or above
-
-* install all dependencies by cding to the folder with app.py and using: <br /> 
+* install python3
 
 * pip install -r requirements.txt
 
