@@ -98,19 +98,20 @@ def download_playlist():
 
 # main menu
 def menu():
-    # download playlist or single url
-    p_or_s = str(input("Playlist or single? (p/s): "))
-    if p_or_s == "s" or p_or_s == "S":
-        audio_or_video = str(input("Audio or video? (a/v): "))
-        if audio_or_video == "a":
-            download_audio()
-        elif audio_or_video == "v":
-            download_video()
-    elif p_or_s == "p":
-        download_playlist()
-    else:
-        print("\noops! I didn't catch that. Please re-enter a valid option.")
-        menu()
+    while True:
+        # download playlist or single url
+        p_or_s = str(input("Playlist or single? (p/s): "))
+        if p_or_s == "s" or p_or_s == "S":
+            audio_or_video = str(input("Audio or video? (a/v): "))
+            if audio_or_video == "a":
+                download_audio()
+            elif audio_or_video == "v":
+                download_video()
+        elif p_or_s == "p":
+            download_playlist()
+        else:
+            print("\noops! I didn't catch that. Please re-enter a valid option.")
+            menu()
 
 
 if __name__ == "__main__":
