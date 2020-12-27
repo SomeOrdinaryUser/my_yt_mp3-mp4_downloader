@@ -1,6 +1,6 @@
 ## How to use:
 
-      pip install -r requirements.txt
+    pip install -r requirements.txt
 
 - [x] This is a prompt-based youtube downloader that can
 download audio or video for both playlists/singlulars.
