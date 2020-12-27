@@ -5,4 +5,4 @@ download audio or video.
 
 * Each file includes metadata and song artwork pulled from the videos thumbnail.
 
-EXAMPLE VIDEO: <br /> [![EXAMPLE VIDEO](https://i.imgur.com/eBlyUtC.png)](https://youtu.be/1fj-am8wX30)
+* EXAMPLE VIDEO: <br /> [![EXAMPLE VIDEO](https://i.imgur.com/eBlyUtC.png)](https://youtu.be/1fj-am8wX30)
