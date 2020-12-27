@@ -110,7 +110,7 @@ def menu():
         elif p_or_s == "p":
             download_playlist()
         else:
-            print("\noops! I didn't catch that. Please re-enter a valid option.")
+            print("oops! I didn't catch that. Please re-enter a valid option.")
             menu()
 
 
