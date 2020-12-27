@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 import getpass
 import youtube_dl
+import time
 
 # get users name of computer so you don't need to change any code if you download this source
 username = getpass.getuser()
@@ -60,7 +61,10 @@ def download_audio():
 def download_video():
     single = str(input("Enter a url: "))
     ydl_opts = {
-        "outtmpl": "C:/Users/" + username + "Music/yt_downloader/videos/" + "%(title)s",
+        "outtmpl": "C:/Users/"
+        + username
+        + "/Music/yt_downloader/videos/"
+        + "%(title)s",
     }
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
         ydl.download([single])
@@ -96,6 +100,19 @@ def download_playlist():
     menu()
 
 
+def download_video_playlist():
+    single = str(input("Enter a url: "))
+    ydl_opts = {
+        "outtmpl": "C:/Users/"
+        + username
+        + "/Music/yt_downloader/videos/"
+        + "%(title)s",
+    }
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        ydl.download([single])
+        menu()
+
+
 # main menu
 def menu():
     while True:
@@ -108,7 +125,11 @@ def menu():
             elif audio_or_video == "v":
                 download_video()
         elif p_or_s == "p":
-            download_playlist()
+            ask = input("download playlist as audio or video? (a/v)")
+            if ask == "v":
+                download_video_playlist()
+            elif ask == "a":
+                download_playlist()
         else:
             print("oops! I didn't catch that. Please re-enter a valid option.")
             menu()
