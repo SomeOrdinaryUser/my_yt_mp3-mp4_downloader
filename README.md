@@ -1,3 +1,4 @@
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Github All Releases](https://img.shields.io/github/downloads/SomeOrdinaryUser/my_yt_mp3-mp4_downloader/total.svg)]()
 
 ## How to use:
