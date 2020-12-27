@@ -1,5 +1,5 @@
 * This is a prompt-based youtube downloader that can 
-download audio or video
+download audio or video.
 
 * Made using youtube_dl library.
 
