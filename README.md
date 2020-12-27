@@ -1,3 +1,5 @@
+[![Github All Releases](https://img.shields.io/github/downloads/SomeOrdinaryUser/my_yt_mp3-mp4_downloader/total.svg)]()
+
 ## How to use:
 
     pip install -r requirements.txt
