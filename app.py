@@ -125,7 +125,7 @@ def menu():
             elif audio_or_video == "v":
                 download_video()
         elif p_or_s == "p":
-            ask = input("download playlist as audio or video? (a/v)")
+            ask = input("download playlist as audio or video? (a/v): ")
             if ask == "v":
                 download_video_playlist()
             elif ask == "a":
