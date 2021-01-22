@@ -1,9 +1,8 @@
-from __future__ import unicode_literals
+# from __future__ import unicode_literals # Uncomment this if you use python2
 import getpass
 import youtube_dl
-import time
 
-# get users name of computer so you don't need to change any code if you download this source
+# Get name of computer so user doesn't need to change any code.
 username = getpass.getuser()
 
 print(
@@ -14,23 +13,33 @@ print(
     """
 )
 
-# generate file name
+
 def generate_name():
-    ext = ".%(ext)s"
-    conc_str = (
-        "C:/Users/"
-        + username
-        + "/Music/yt_downloader/audio/"
-        + "%(title)s"
-        + " - "
-        + str(ext)
-    )
-    return conc_str
+    if cust == "":
+        ext = ".%(ext)s"
+        conc_str = (
+            "C:/Users/"
+            + username
+            + "/Music/yt_downloader/audio/"
+            + "%(title)s"
+            + str(ext)
+        )
+        return conc_str
+    else:
+        ext = ".%(ext)s"
+        conc_str = (
+            "C:/Users/"
+            + username
+            + f"/Music/yt_downloader/audio/{cust}/"
+            + "%(title)s"
+            + str(ext)
+        )
+        return conc_str
 
 
-# download audio
+# Download audio [single/playlist]
 def download_audio():
-    single_url = str(input("Enter single url: "))
+    single_url = str(input("Enter url: "))
     ydl_opts = {
         "writethumbnail": True,
         "ignoreerrors": True,
@@ -46,20 +55,19 @@ def download_audio():
         ],
         "outtmpl": generate_name(),
     }
-    with youtube_dl.YoutubeDL(ydl_opts, "-k") as ydl:
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
         try:
             ydl.download([single_url])
         except:
             print(
-                "oof! URL doesn't exist. Please remove the broken link in your playlist :)"
+                "URL doesn't exist. Please remove the broken link in your playlist :)"
             )
-            print("Done!\n")
             menu()
 
 
 # download video
 def download_video():
-    single = str(input("Enter a url: "))
+    single = str(input("Enter url: "))
     ydl_opts = {
         "outtmpl": "C:/Users/"
         + username
@@ -71,65 +79,18 @@ def download_video():
         menu()
 
 
-# download playlist
-def download_playlist():
-    enter_playlist_url = str(input("Enter playlist url: "))
-    ydl_opts = {
-        "writethumbnail": True,
-        "ignoreerrors": True,
-        "format": "bestaudio/best",
-        "postprocessors": [
-            {
-                "key": "FFmpegExtractAudio",
-                "preferredcodec": "mp3",
-                "preferredquality": "192",
-            },
-            {"key": "EmbedThumbnail"},
-            {"key": "FFmpegMetadata"},
-        ],
-        "outtmpl": generate_name(),
-    }
-    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-        try:
-            ydl.download([enter_playlist_url])
-        except:
-            print(
-                "oof! URL doesn't exist. Please remove the broken link in your playlist :)"
-            )
-    print("\nDone downloading playlist.")
-    menu()
-
-
-def download_video_playlist():
-    single = str(input("Enter a url: "))
-    ydl_opts = {
-        "outtmpl": "C:/Users/"
-        + username
-        + "/Music/yt_downloader/videos/"
-        + "%(title)s",
-    }
-    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-        ydl.download([single])
-        menu()
-
-
-# main menu
+# Main menu
 def menu():
+    global cust
     while True:
-        # download playlist or single url
-        p_or_s = str(input("Playlist or single? (p/s): "))
-        if p_or_s == "s" or p_or_s == "S":
-            audio_or_video = str(input("Audio or video? (a/v): "))
-            if audio_or_video == "a":
-                download_audio()
-            elif audio_or_video == "v":
-                download_video()
-        elif p_or_s == "p":
-            ask = input("download playlist as audio or video? (a/v): ")
-            if ask == "v":
-                download_video_playlist()
-            elif ask == "a":
-                download_playlist()
+        cust = input(
+            """Enter custom location path or leave blank for default (/Music/yt_downloader/audio): """
+        )
+        audio_or_video = str(input("Audio or video? (a/v): "))
+        if audio_or_video == "a":
+            download_audio()
+        elif audio_or_video == "v":
+            download_video()
         else:
             print("oops! I didn't catch that. Please re-enter a valid option.")
             menu()
