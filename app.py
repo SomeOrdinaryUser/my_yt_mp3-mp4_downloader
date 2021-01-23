@@ -1,9 +1,9 @@
 # from __future__ import unicode_literals # Uncomment this if you use python2
-import getpass
+import os
 import youtube_dl
 
 # Get name of computer so user doesn't need to change any code
-username = getpass.getuser()
+username = os.getlogin()
 
 print(
     f"""
