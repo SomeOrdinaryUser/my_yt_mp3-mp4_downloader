@@ -2,7 +2,7 @@
 import getpass
 import youtube_dl
 
-# Get name of computer so user doesn't need to change any code.
+# Get name of computer so user doesn't need to change any code
 username = getpass.getuser()
 
 print(
@@ -65,7 +65,7 @@ def download_audio():
             menu()
 
 
-# download video
+# Download video [single/playlist]
 def download_video():
     single = str(input("Enter url: "))
     ydl_opts = {
