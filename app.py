@@ -14,7 +14,7 @@ print(
 )
 
 
-def generate_name():
+def generate_audio_name():
     if cust == "":
         ext = ".%(ext)s"
         conc_str = (
@@ -37,6 +37,29 @@ def generate_name():
         return conc_str
 
 
+def generate_videos_name():
+    if cust == "":
+        ext = ".%(ext)s"
+        conc_str = (
+            "C:/Users/"
+            + username
+            + "/Music/yt_downloader/videos/"
+            + "%(title)s"
+            + str(ext)
+        )
+        return conc_str
+    else:
+        ext = ".%(ext)s"
+        conc_str = (
+            "C:/Users/"
+            + username
+            + f"/Music/yt_downloader/videos/{cust}/"
+            + "%(title)s"
+            + str(ext)
+        )
+        return conc_str
+
+
 # Download audio [single/playlist]
 def download_audio():
     single_url = str(input("Enter url: "))
@@ -53,7 +76,7 @@ def download_audio():
             {"key": "EmbedThumbnail"},
             {"key": "FFmpegMetadata"},
         ],
-        "outtmpl": generate_name(),
+        "outtmpl": generate_audio_name(),
     }
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
         try:
@@ -69,27 +92,27 @@ def download_audio():
 def download_video():
     single = str(input("Enter url: "))
     ydl_opts = {
-        "outtmpl": "C:/Users/"
-        + username
-        + "/Music/yt_downloader/videos/"
-        + "%(title)s",
+        "outtmpl": generate_videos_name(),
     }
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
         ydl.download([single])
-        menu()
+    menu()
 
 
 # Main menu
 def menu():
     global cust
     while True:
-        cust = input(
-            """Enter custom location path or leave blank for default (/Music/yt_downloader/audio): """
-        )
         audio_or_video = str(input("Audio or video? (a/v): "))
         if audio_or_video == "a":
+            cust = input(
+                """Enter new folder name to create/save to or leave blank for default (/Music/yt_downloader/audio): """
+            )
             download_audio()
         elif audio_or_video == "v":
+            cust = input(
+                """Enter new folder name to create/save to or leave blank for default (/Music/yt_downloader/videos): """
+            )
             download_video()
         else:
             print("oops! I didn't catch that. Please re-enter a valid option.")
